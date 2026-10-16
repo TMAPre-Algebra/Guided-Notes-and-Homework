@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guided Notes: Problem Solving — Act It Out</title>
+<style>
+ :root{ --ink:#1d2330; --paper:#fdfdf7; --rule:#cfd2dc; --accent:#2557a7; --accent-soft:#e7eef9;
+   --shade:#6f7785; --good:#1e7a3b; --good-bg:#e6f5ec; --warn:#a02828; --warn-bg:#fbe9e9; --banner:#fff3d6; --banner-b:#e0b84a; --fs:1; }
+ :root.hc{ --ink:#000; --paper:#fff; --rule:#000; --accent:#000; --accent-soft:#ffe600; --shade:#000;
+   --good:#004b1e; --good-bg:#c9ffd8; --warn:#7a0000; --warn-bg:#ffd6d6; --banner:#ffe600; --banner-b:#000; }
+ *{box-sizing:border-box} html,body{margin:0}
+ body{background:#eef0ee;color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.5;-webkit-text-size-adjust:100%;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+ header.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:2px solid var(--accent);padding:10px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+ header.topbar h1{margin:0;font-size:calc(18px * var(--fs));color:var(--accent);font-family:"Helvetica Neue",Arial,sans-serif}
+ .tools{display:flex;gap:6px;flex-wrap:wrap;flex:1;justify-content:flex-end}
+ button{font-family:"Helvetica Neue",Arial,sans-serif;cursor:pointer;border:1px solid var(--accent);border-radius:6px;padding:7px 12px;font-size:calc(13px * var(--fs));font-weight:700;color:#fff;background:var(--accent)}
+ button.ghost{background:#fff;color:var(--accent)} button:active{transform:translateY(1px)}
+ #timerBtn{min-width:96px}
+ main{max-width:820px;margin:16px auto;background:var(--paper);border:1px solid var(--rule);border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:26px 30px}
+ .doc-h{border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:12px}
+ .doc-h h2{margin:0 0 2px;font-size:calc(24px * var(--fs));font-family:"Helvetica Neue",Arial,sans-serif}
+ .doc-h .sub{color:var(--shade);font-size:calc(14px * var(--fs))}
+ .banner{background:var(--banner);border:1px solid var(--banner-b);border-radius:8px;padding:9px 14px;margin:10px 0;font-weight:700;font-family:"Helvetica Neue",Arial,sans-serif;font-size:calc(14px * var(--fs))}
+ .namerow{display:none;margin:0 0 10px;font-size:calc(15px * var(--fs))}
+ .intro{background:var(--accent-soft);border-radius:8px;padding:12px 14px;margin:10px 0 16px;font-size:calc(15px * var(--fs))}
+ section.part{margin:16px 0}
+ section.part>h3{font-family:"Helvetica Neue",Arial,sans-serif;font-size:calc(16px * var(--fs));color:var(--accent);border-bottom:1px solid var(--rule);padding-bottom:4px;margin:0 0 6px}
+ .note{color:var(--shade);font-style:italic;font-size:calc(14px * var(--fs));margin:4px 0 10px}
+ .concept{background:#f4f8ff;border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;margin:10px 0;break-inside:avoid}
+ .concept h4{margin:.1em 0 .3em;color:var(--accent);font-family:"Helvetica Neue",Arial,sans-serif;font-size:calc(15px * var(--fs))}
+ .concept p{margin:.2em 0;font-size:calc(14.5px * var(--fs))}
+ .concept .ex{background:#fff;border:1px dashed var(--rule);border-radius:6px;padding:6px 10px;margin-top:6px;font-size:calc(14px * var(--fs))}
+ .gridwrap{text-align:center;margin:8px 0;break-inside:avoid}
+ svg.grid{max-width:100%;height:auto;background:#fff;border:1px solid var(--rule);border-radius:8px}
+ .gridinstr{font-size:calc(14px * var(--fs));color:var(--shade);font-style:italic;margin-bottom:4px}
+ .p{border:1px solid var(--rule);border-radius:8px;background:#fff;padding:11px 14px;margin:9px 0;break-inside:avoid}
+ .p .q{font-size:calc(16px * var(--fs));font-weight:700;margin-bottom:7px}
+ .p .q .num{color:var(--accent);margin-right:6px}
+ .pts{color:var(--shade);font-weight:700;font-size:calc(12px * var(--fs));float:right;margin-left:8px}
+ .ansline{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0}
+ .ansline label{font-size:calc(14px * var(--fs));color:var(--shade);font-weight:700}
+ .ansline input[type=text]{font-family:inherit;font-size:calc(16px * var(--fs));padding:6px 8px;border:0;border-bottom:2px solid var(--accent);background:transparent;min-width:180px;color:var(--ink)}
+ .choices{display:flex;flex-wrap:wrap;gap:8px 18px;margin:4px 0}
+ .choices label{font-size:calc(15px * var(--fs));display:flex;align-items:center;gap:6px;cursor:pointer}
+ .choices input{width:18px;height:18px}
+ .worklabel{font-size:calc(13px * var(--fs));color:var(--shade);margin:8px 0 2px}
+ textarea.work{width:100%;min-height:58px;font-family:inherit;font-size:calc(15px * var(--fs));padding:8px;border:1px dashed var(--rule);border-radius:6px;background:#fff;resize:vertical;color:var(--ink)}
+ .pbtns{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+ .pbtns button{padding:5px 10px;font-size:calc(12px * var(--fs))}
+ .result{font-size:calc(14px * var(--fs));font-weight:700;padding:3px 8px;border-radius:5px}
+ .result.ok{color:var(--good);background:var(--good-bg)} .result.no{color:var(--warn);background:var(--warn-bg)}
+ .reveal{font-size:calc(14px * var(--fs));background:var(--accent-soft);border-radius:6px;padding:6px 10px;margin-top:6px;display:none}
+ .reveal.show{display:block}
+ .keybox{background:#f7f7f2;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-top:8px;columns:2;column-gap:26px;font-size:calc(14px * var(--fs))}
+ .keybox div{break-inside:avoid;margin:2px 0}
+ .foot{color:var(--shade);font-size:calc(13px * var(--fs));border-top:1px solid var(--rule);margin-top:18px;padding-top:10px}
+ [hidden]{display:none!important}
+ @media print{
+   @page{ margin:12mm 13mm 14mm; }
+   body{background:#fff}
+   header.topbar{display:none}
+   [data-screen]{display:none!important}
+   main{box-shadow:none;border:0;border-radius:0;margin:0;max-width:100%;padding:0}
+   .namerow{display:block;border-bottom:1px solid #000;padding-bottom:6px;margin-bottom:8px}
+   .pbtns,.reveal,.result{display:none!important}
+   .banner{background:#f2f2f2}
+   .intro{background:#f2f2f2;margin:8px 0 12px;padding:8px 10px}
+   section.part{margin:8px 0}
+   .concept{background:#f7f7f7}
+   .p{break-inside:avoid;border-color:#999;padding:5px 10px;margin:4px 0}
+   .p .q{margin-bottom:3px}
+   .worklabel{margin:3px 0 0}
+   textarea.work{min-height:36px;border:1px solid #999}
+   .keybox{columns:2}
+ }
+</style>
+<style id="twopage">@media print{@page{margin:8mm 10mm 8mm;}header.topbar,.topbar{display:none!important}.intro{margin:2px 0 5px!important;padding:4px 8px!important;font-size:11.5px!important}.banner{margin:3px 0!important;padding:4px 8px!important;font-size:11px!important}.namerow{margin:0 0 4px!important;padding-bottom:3px!important}section.part,.part{margin:3px 0!important}h3{margin:2px 0!important;font-size:12.5px!important}.note{margin:1px 0 3px!important;font-size:10.5px!important}.concept{margin:3px 0!important;padding:4px 8px!important}.ex{margin:2px 0 0!important;padding:3px 6px!important;font-size:11px!important}.keybox{margin:3px 0!important;padding:4px 8px!important}.p{padding:3px 8px!important;margin:3px 0!important}.p .q{font-size:12px!important;margin-bottom:2px!important}.ansline input[type=text]{min-width:140px!important}.worklabel{margin:1px 0 0!important;font-size:9.5px!important}textarea.work,.work{min-height:16px!important}.foot{display:none!important}}</style></head>
+<body>
+<header class="topbar">
+  <h1 id="hwtitle"></h1>
+  <div class="tools">
+    <button class="ghost" id="aMinus">A−</button>
+    <button class="ghost" id="aPlus">A+</button>
+    <button class="ghost" id="hc">◐ Contrast</button>
+    <button class="ghost" id="timerBtn" hidden>▶ 35:00</button>
+    <button class="ghost" id="checkAll" hidden>Check all</button>
+    <button class="ghost" id="reset">Reset</button>
+    <button id="printBtn">📄 Save as PDF</button>
+  </div>
+</header>
+<main>
+  <div class="doc-h"><h2 id="h2title"></h2><div class="sub" id="subtitle"></div></div>
+  <div class="banner" id="banner"></div>
+  <div class="namerow">Name: ____________________________&nbsp;&nbsp;&nbsp;&nbsp;Date: ______________&nbsp;&nbsp;&nbsp;&nbsp;Score: ______ / 100</div>
+  <div data-screen style="margin:-2px 0 8px;font-size:15px"><label for="stuName" style="color:#6f7785">Your name </label><input type="text" id="stuName" placeholder="Type your name" style="font-family:inherit;font-size:15px;padding:5px 8px;border:1px solid #cfd2dc;border-radius:6px"></div>
+  <div class="intro" id="intro"></div>
+  <div id="body"></div>
+  <div class="foot" id="foot"></div>
+</main>
+<script>
+const DOC = {"id": "guided_notes_3-8_act_it_out", "kind": "guide", "reveal": false, "showTimer": false, "answerKey": false, "title": "Guided Notes: Problem Solving — Act It Out", "code": "MP1", "subtitle": "Pre-Algebra · Problem Solving · Thu 10/22", "banner": "Fill this in as we go · do the partner set together · both of you should be able to explain", "intro": "Fill in the notes as we go. Draw a picture or act it out for each problem. Then write the math. Show your work.", "sections": [{"name": "Warm-up", "items": [{"kind": "problem", "n": 1, "q": "You have a dime, a nickel, and a penny. How much money is that?", "type": "short", "work": true, "m": "e"}]}, {"name": "Notes — fill this in as we go", "note": "Write this while your teacher shows an example.", "items": [{"kind": "concept", "title": "Act it out", "lines": "When a problem is hard to picture, act it out or draw it. Then write the math.", "example": "4 friends share 12 stickers. Draw 4 groups. Each group gets 3."}, {"kind": "concept", "title": "Four steps", "lines": "1) Read it.   2) Act it out or draw it.   3) Write the math.   4) Check your answer.", "example": null}, {"kind": "problem", "n": 2, "q": "You try: A ribbon is 2.5 m long. You cut it into 0.5 m pieces. How many pieces?", "type": "short", "work": true, "m": "e"}]}, {"name": "Work with your partner", "note": "Take turns. Draw each one first, then write the math.", "items": [{"kind": "problem", "n": 3, "q": "Sophia bakes 24 cookies. She puts 6 on each plate. How many plates?", "type": "short", "work": true, "m": "e"}, {"kind": "problem", "n": 4, "q": "Naarah has $5. She buys a pen for $1.50. How much money is left?", "type": "short", "work": true, "m": "e"}, {"kind": "problem", "n": 5, "q": "Lincoln has 3 stacks of board games with 4 in each stack. How many games in all?", "type": "short", "work": true, "m": "e"}]}, {"name": "On your own", "note": "Do this one by yourself.", "items": [{"kind": "problem", "n": 6, "q": "You walk 0.5 km to school and 0.5 km home. How far is that in all?", "type": "short", "work": true, "m": "e"}]}]};
+(function(){
+ "use strict";
+ var KEY="assess_"+DOC.id;
+ function $(id){return document.getElementById(id);}
+ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]);});}
+ function norm(s){return (s||"").toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/^=/,'');}
+
+ $('hwtitle').textContent=DOC.title; $('h2title').textContent=DOC.title;
+ $('subtitle').textContent=DOC.subtitle+"  ·  "+DOC.code;
+ $('banner').textContent=DOC.banner; $('intro').textContent=DOC.intro;
+ document.title=DOC.title;
+ $('foot').textContent = DOC.reveal
+   ? "Use Check or Show answer as you practice. Your typing saves automatically on this device."
+   : "Fill this in as you go and show your work. Your typing saves automatically on this device; use Save as PDF when you are done.";
+ if(DOC.kind!=='test'){ document.querySelector('.namerow').innerHTML="Name: ____________________________&nbsp;&nbsp;&nbsp;&nbsp;Date: ______________"; }
+
+ var body=$('body'), practiceProblems=[];
+ DOC.sections.forEach(function(sec){
+   var s=document.createElement('section'); s.className='part';
+   var h=document.createElement('h3'); h.textContent=sec.name; s.appendChild(h);
+   if(sec.note){var nt=document.createElement('div');nt.className='note';nt.textContent=sec.note;s.appendChild(nt);}
+   sec.items.forEach(function(it){
+     if(it.kind==='concept'){
+       var c=document.createElement('div');c.className='concept';
+       var t=document.createElement('h4');t.textContent=it.title;c.appendChild(t);
+       (it.lines?[it.lines]:[]).forEach(function(){});
+       var pr=document.createElement('p');pr.textContent=it.lines;c.appendChild(pr);
+       if(it.example){var ex=document.createElement('div');ex.className='ex';ex.innerHTML='<b>Example:</b> '+esc(it.example);c.appendChild(ex);}
+       s.appendChild(c);
+     } else if(it.kind==='grid'){
+       var g=document.createElement('div');g.className='gridwrap';
+       var gi=document.createElement('div');gi.className='gridinstr';gi.textContent=it.instr;g.appendChild(gi);
+       var holder=document.createElement('div');holder.innerHTML=it.svg;g.appendChild(holder.firstChild);
+       s.appendChild(g);
+     } else { // problem
+       practiceProblems.push(it);
+       var d=document.createElement('div');d.className='p';d.id='p'+it.n;
+       var q=document.createElement('div');q.className='q';
+       var pts = it.points!=null ? '<span class="pts">('+it.points+' pt'+(it.points===1?'':'s')+')</span>' : '';
+       q.innerHTML=pts+'<span class="num">'+it.n+'.</span>'+esc(it.q); d.appendChild(q);
+       if(it.type==='mc'){
+         var ch=document.createElement('div');ch.className='choices';
+         it.choices.forEach(function(cc){
+           var lab=document.createElement('label');var r=document.createElement('input');
+           r.type='radio';r.name='q'+it.n;r.value=cc;r.dataset.k='ans'+it.n;
+           lab.appendChild(r);lab.appendChild(document.createTextNode(' '+cc));ch.appendChild(lab);
+         });
+         d.appendChild(ch);
+       } else if(it.type==='short'){
+         var al=document.createElement('div');al.className='ansline';
+         var lb=document.createElement('label');lb.textContent='Answer:';lb.setAttribute('for','ans'+it.n);
+         var inp=document.createElement('input');inp.type='text';inp.id='ans'+it.n;inp.dataset.k='ans'+it.n;inp.autocomplete='off';
+         al.appendChild(lb);al.appendChild(inp);d.appendChild(al);
+       }
+       if(it.work!==false){
+         var wl=document.createElement('div');wl.className='worklabel';wl.textContent='Show your work';
+         var ta=document.createElement('textarea');ta.className='work';ta.dataset.k='work'+it.n;ta.rows=2;
+         d.appendChild(wl);d.appendChild(ta);
+       }
+       if(DOC.reveal){
+         var bt=document.createElement('div');bt.className='pbtns';
+         if(it.type!=='explain'){var cb=document.createElement('button');cb.className='ghost';cb.textContent='Check';cb.onclick=function(){checkOne(it,d);};bt.appendChild(cb);}
+         var sb=document.createElement('button');sb.className='ghost';sb.textContent='Show answer';sb.onclick=function(){d.querySelector('.reveal').classList.toggle('show');};bt.appendChild(sb);
+         var res=document.createElement('span');res.className='result';res.style.display='none';bt.appendChild(res);
+         d.appendChild(bt);
+         var rv=document.createElement('div');rv.className='reveal';rv.innerHTML='<b>Answer:</b> '+esc(it.answer);d.appendChild(rv);
+       }
+       s.appendChild(d);
+     }
+   });
+   body.appendChild(s);
+ });
+
+ // answer key (guide only)
+ if(DOC.answerKey){
+   var ks=document.createElement('section');ks.className='part';
+   var kh=document.createElement('h3');kh.textContent='Answer key (practice)';ks.appendChild(kh);
+   var kb=document.createElement('div');kb.className='keybox';
+   practiceProblems.forEach(function(p){var dv=document.createElement('div');dv.innerHTML='<b>'+p.n+'.</b> '+esc(p.answer);kb.appendChild(dv);});
+   ks.appendChild(kb);body.appendChild(ks);
+ }
+
+ function getVal(p,d){
+   if(p.type==='mc'){var r=d.querySelector('input[name="q'+p.n+'"]:checked');return r?r.value:'';}
+   if(p.type==='short'){var i=d.querySelector('#ans'+p.n);return i?i.value:'';}
+   return '';
+ }
+ function checkOne(p,d){
+   var res=d.querySelector('.result');if(!res)return false;res.style.display='inline-block';
+   var v=getVal(p,d); if(!v){res.className='result no';res.textContent='Answer first';return false;}
+   var nv=norm(v),ok;
+   if(p.type==='mc'){ok=(v===p.answer);}
+   else if(p.m==='c'){ok=(p.accept||[]).some(function(a){return nv.indexOf(norm(a))>=0;});}
+   else {ok=(p.accept||[]).some(function(a){return norm(a)===nv;});}
+   res.className='result '+(ok?'ok':'no');res.textContent=ok?'✓ Correct':'✗ Try again';return ok;
+ }
+ if(DOC.reveal){ $('checkAll').hidden=false; $('checkAll').onclick=function(){
+   var r=0,t=0;practiceProblems.forEach(function(p){t++;if(checkOne(p,$('p'+p.n)))r++;});
+   alert('You have '+r+' of '+t+' correct.');
+ };}
+
+ // autosave
+ function save(){try{var o={_name:($('stuName')?$('stuName').value:'')};document.querySelectorAll('[data-k]').forEach(function(el){if(el.type==='radio'){if(el.checked)o[el.dataset.k]=el.value;}else o[el.dataset.k]=el.value;});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+ function load(){try{var raw=localStorage.getItem(KEY);if(!raw)return;var o=JSON.parse(raw);if(o._name&&$('stuName'))$('stuName').value=o._name;document.querySelectorAll('[data-k]').forEach(function(el){var v=o[el.dataset.k];if(v===undefined)return;if(el.type==='radio'){if(el.value===v)el.checked=true;}else el.value=v;});}catch(e){}}
+ document.addEventListener('input',save,true);document.addEventListener('change',save,true);load();
+
+ // toolbar
+ var fs=1;function applyFs(){document.documentElement.style.setProperty('--fs',fs.toFixed(2));try{localStorage.setItem('as_fs',fs);}catch(e){}}
+ try{var sfs=parseFloat(localStorage.getItem('as_fs'));if(sfs){fs=sfs;applyFs();}}catch(e){}
+ try{if(localStorage.getItem('as_hc')==='1')document.documentElement.classList.add('hc');}catch(e){}
+ $('aPlus').onclick=function(){fs=Math.min(1.6,fs+0.1);applyFs();};
+ $('aMinus').onclick=function(){fs=Math.max(0.85,fs-0.1);applyFs();};
+ $('hc').onclick=function(){var on=document.documentElement.classList.toggle('hc');try{localStorage.setItem('as_hc',on?'1':'0');}catch(e){}};
+ $('printBtn').onclick=function(){ try{var nm=(($('stuName')&&$('stuName').value)||'').trim(); document.title = nm ? (nm+' - '+DOC.title) : DOC.title;}catch(e){} window.print(); };
+ $('reset').onclick=function(){if(confirm('Clear everything you have typed on this device?')){try{localStorage.removeItem(KEY);}catch(e){}location.reload();}};
+
+ // optional timer (test)
+ if(DOC.showTimer){
+   var tb=$('timerBtn');tb.hidden=false;var total=35*60,left=total,running=false,iv=null;
+   function fmt(x){var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+   function draw(){tb.textContent=(running?'‖ ':'▶ ')+fmt(left);}
+   draw();
+   tb.onclick=function(){
+     if(!running){ running=true;draw(); iv=setInterval(function(){left--;if(left<=0){left=0;clearInterval(iv);running=false;tb.textContent='⏰ 0:00';tb.style.color='var(--warn)';return;}draw();},1000); }
+     else { running=false;clearInterval(iv);draw(); }
+   };
+ }
+})();
+</script>
+</body>
+</html>
