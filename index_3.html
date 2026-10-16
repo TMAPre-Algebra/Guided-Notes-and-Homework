@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-Algebra — This Week</title>
+<style>
+ :root{--ink:#1d2330;--muted:#5b6678;--accent:#2557a7;--bg:#f4f6fb;--card:#fff;--line:#d8deea;--fs:1}
+ :root.hc{--ink:#000;--muted:#000;--accent:#0030c0;--bg:#fff;--card:#fff;--line:#000}
+ *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
+   font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;line-height:1.4;padding:0 0 40px;
+   font-size:calc(1rem*var(--fs));-webkit-text-size-adjust:100%}
+ header{background:var(--accent);color:#fff;padding:20px 16px}
+ .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+ header h1{margin:0;font-size:calc(1.5rem*var(--fs))}
+ header p{margin:6px 0 0;opacity:.92;font-size:calc(1rem*var(--fs))}
+ .tools{margin-top:10px}
+ .tools button{font-family:inherit;cursor:pointer;border:0;border-radius:8px;padding:6px 10px;font-weight:700;
+   background:rgba(255,255,255,.2);color:#fff;font-size:calc(.9rem*var(--fs))}
+ h2{font-size:calc(1.2rem*var(--fs));margin:26px 0 8px;border-bottom:2px solid var(--accent);padding-bottom:4px}
+ .sub{color:var(--muted);font-size:calc(.95rem*var(--fs));margin:0 0 10px}
+ .grid{display:grid;gap:10px}
+ a.card{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);background:var(--card);
+   border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform .05s, box-shadow .1s}
+ a.card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
+ a.card:focus{outline:3px solid var(--accent);outline-offset:2px}
+ .day{flex:0 0 auto;min-width:78px;font-weight:800;color:var(--accent);font-size:calc(.95rem*var(--fs))}
+ .t{flex:1;font-weight:700;font-size:calc(1.05rem*var(--fs))}
+ .go{flex:0 0 auto;color:var(--muted);font-weight:700}
+ .note{background:#fff;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;margin-top:22px;
+   color:var(--ink);font-size:calc(.98rem*var(--fs))}
+ footer{color:var(--muted);text-align:center;margin-top:26px;font-size:calc(.85rem*var(--fs))}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Pre-Algebra — This Week</h1>
+  <p>Working with Decimals &amp; Problem Solving</p>
+  <div class="tools"><button id="aBig">A+ Bigger text</button> <button id="hc">◐ High contrast</button></div>
+</div></header>
+
+<main class="wrap">
+  <h2>Guided Notes</h2>
+  <p class="sub">Fill these in during class.</p>
+  <div class="grid">
+<a class="card" href="notes-decimals-add-subtract.html"><span class="day">Mon</span><span class="t">Solving Equations with Decimals (+ and −)</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="notes-decimals-multiply-divide.html"><span class="day">Tue</span><span class="t">Solving Equations with Decimals (× and ÷)</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="notes-metric-system.html"><span class="day">Wed</span><span class="t">Using the Metric System</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="notes-problem-solving.html"><span class="day">Thu</span><span class="t">Problem Solving: Act It Out</span><span class="go">Open &rsaquo;</span></a>
+  </div>
+
+  <h2>Homework</h2>
+  <p class="sub">Tonight's practice.</p>
+  <div class="grid">
+<a class="card" href="hw-decimals-add-subtract.html"><span class="day">Mon night</span><span class="t">Solving Equations with Decimals (+ and −)</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="hw-decimals-multiply-divide.html"><span class="day">Tue night</span><span class="t">Solving Equations with Decimals (× and ÷)</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="hw-metric-system.html"><span class="day">Wed night</span><span class="t">Using the Metric System</span><span class="go">Open &rsaquo;</span></a>
+<a class="card" href="hw-problem-solving.html"><span class="day">Thu night</span><span class="t">Problem Solving: Act It Out</span><span class="go">Open &rsaquo;</span></a>
+  </div>
+
+  <div class="note">
+    <b>How to turn in your work:</b> Type your answers right on the page — your work saves on this device as you go.
+    When you finish, click <b>📄 Save as PDF</b> at the top of the page, then send that PDF to Mr. Martin.
+  </div>
+  <footer>Talcott Mountain Academy · Pre-Algebra</footer>
+</main>
+<script>
+ var d=document.documentElement, fs=1;
+ function ap(){d.style.setProperty('--fs',fs.toFixed(2));}
+ document.getElementById('aBig').onclick=function(){fs=fs>=1.4?1:fs+0.15;ap();};
+ document.getElementById('hc').onclick=function(){d.classList.toggle('hc');};
+</script>
+</body>
+</html>
